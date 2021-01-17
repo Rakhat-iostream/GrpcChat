@@ -1,0 +1,5 @@
+C:\Users\Rakhat\source\repos\GrpcChat\GrpcChat\obj\Debug\netcoreapp3.1\GrpcChat.csprojAssemblyReference.cache
+C:\Users\Rakhat\source\repos\GrpcChat\GrpcChat\obj\Debug\netcoreapp3.1\GrpcChat.AssemblyInfoInputs.cache
+C:\Users\Rakhat\source\repos\GrpcChat\GrpcChat\obj\Debug\netcoreapp3.1\GrpcChat.AssemblyInfo.cs
+C:\Users\Rakhat\source\repos\GrpcChat\GrpcChat\obj\Debug\netcoreapp3.1\GrpcChat.csproj.CoreCompileInputs.cache
+C:\Users\Rakhat\source\repos\GrpcChat\GrpcChat\obj\Debug\netcoreapp3.1\GrpcChat.MvcApplicationPartsAssemblyInfo.cache
