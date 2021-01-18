@@ -9,7 +9,7 @@ namespace GrpcChat.Models
     {
         public string User { get; set; }
         public string Text { get; set; }
-        public Guid ChatId { get; set; }
+        public Guid ChatRoomId { get; set; }
         public ChatModel Chat { get; set; }
     }
 }

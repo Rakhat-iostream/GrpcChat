@@ -8,12 +8,13 @@
 using grpc = global::Grpc.Core;
 
 namespace GrpcChat {
-  public static partial class GrpcChat
+  public static partial class ChatService
   {
-    static readonly string __ServiceName = "chat.GrpcChat";
+    static readonly string __ServiceName = "chat.ChatService";
 
     static readonly grpc::Marshaller<global::GrpcChat.Message> __Marshaller_chat_Message = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GrpcChat.Message.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GrpcChat.Void> __Marshaller_chat_Void = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GrpcChat.Void.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::GrpcChat.LookUp> __Marshaller_chat_LookUp = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GrpcChat.LookUp.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::GrpcChat.ChatRooms> __Marshaller_chat_ChatRooms = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GrpcChat.ChatRooms.Parser.ParseFrom);
 
     static readonly grpc::Method<global::GrpcChat.Message, global::GrpcChat.Message> __Method_Join = new grpc::Method<global::GrpcChat.Message, global::GrpcChat.Message>(
         grpc::MethodType.DuplexStreaming,
@@ -22,12 +23,19 @@ namespace GrpcChat {
         __Marshaller_chat_Message,
         __Marshaller_chat_Message);
 
-    static readonly grpc::Method<global::GrpcChat.Void, global::GrpcChat.Message> __Method_MessageHistory = new grpc::Method<global::GrpcChat.Void, global::GrpcChat.Message>(
+    static readonly grpc::Method<global::GrpcChat.LookUp, global::GrpcChat.Message> __Method_MessageHistory = new grpc::Method<global::GrpcChat.LookUp, global::GrpcChat.Message>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "MessageHistory",
-        __Marshaller_chat_Void,
+        __Marshaller_chat_LookUp,
         __Marshaller_chat_Message);
+
+    static readonly grpc::Method<global::GrpcChat.LookUp, global::GrpcChat.ChatRooms> __Method_GetChatRooms = new grpc::Method<global::GrpcChat.LookUp, global::GrpcChat.ChatRooms>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetChatRooms",
+        __Marshaller_chat_LookUp,
+        __Marshaller_chat_ChatRooms);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -35,16 +43,21 @@ namespace GrpcChat {
       get { return global::GrpcChat.ChatReflection.Descriptor.Services[0]; }
     }
 
-    /// <summary>Base class for server-side implementations of GrpcChat</summary>
-    [grpc::BindServiceMethod(typeof(GrpcChat), "BindService")]
-    public abstract partial class GrpcChatBase
+    /// <summary>Base class for server-side implementations of ChatService</summary>
+    [grpc::BindServiceMethod(typeof(ChatService), "BindService")]
+    public abstract partial class ChatServiceBase
     {
       public virtual global::System.Threading.Tasks.Task Join(grpc::IAsyncStreamReader<global::GrpcChat.Message> requestStream, grpc::IServerStreamWriter<global::GrpcChat.Message> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task MessageHistory(global::GrpcChat.Void request, grpc::IServerStreamWriter<global::GrpcChat.Message> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task MessageHistory(global::GrpcChat.LookUp request, grpc::IServerStreamWriter<global::GrpcChat.Message> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::GrpcChat.ChatRooms> GetChatRooms(global::GrpcChat.LookUp request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -53,21 +66,23 @@ namespace GrpcChat {
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(GrpcChatBase serviceImpl)
+    public static grpc::ServerServiceDefinition BindService(ChatServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_Join, serviceImpl.Join)
-          .AddMethod(__Method_MessageHistory, serviceImpl.MessageHistory).Build();
+          .AddMethod(__Method_MessageHistory, serviceImpl.MessageHistory)
+          .AddMethod(__Method_GetChatRooms, serviceImpl.GetChatRooms).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
     /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static void BindService(grpc::ServiceBinderBase serviceBinder, GrpcChatBase serviceImpl)
+    public static void BindService(grpc::ServiceBinderBase serviceBinder, ChatServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Join, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::GrpcChat.Message, global::GrpcChat.Message>(serviceImpl.Join));
-      serviceBinder.AddMethod(__Method_MessageHistory, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::GrpcChat.Void, global::GrpcChat.Message>(serviceImpl.MessageHistory));
+      serviceBinder.AddMethod(__Method_MessageHistory, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::GrpcChat.LookUp, global::GrpcChat.Message>(serviceImpl.MessageHistory));
+      serviceBinder.AddMethod(__Method_GetChatRooms, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcChat.LookUp, global::GrpcChat.ChatRooms>(serviceImpl.GetChatRooms));
     }
 
   }
