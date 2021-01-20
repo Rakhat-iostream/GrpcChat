@@ -1,6 +1,7 @@
 ﻿using Grpc.Net.Client;
 using GrpcChat;
 using System;
+using ChatClient;
 using System.Threading.Tasks;
 
 namespace GrpcChatClient
@@ -12,7 +13,7 @@ namespace GrpcChatClient
             Console.Write("Please enter your name: ");
             var username = Console.ReadLine();
             var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            var client = new ChatService.ChatServiceClient(channel);
+            var client = new ChatService.GrpcChatClient(channel);
             foreach (var chatRoom in client.GetChatRoomsAsync(new LookUp()).ResponseAsync.Result.ChatRooms_)
             {
                 Console.WriteLine(chatRoom.Id + ": " + chatRoom.Name);
